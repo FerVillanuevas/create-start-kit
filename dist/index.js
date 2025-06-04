@@ -12,7 +12,12 @@ const TEMPLATES = {
         name: "Tanstack Start",
         repo: "https://github.com/FerVillanuevas/start-kit",
         description: "Tanstack Start, Vite, and Tailwind CSS",
-    }
+    },
+    "mob-kit": {
+        name: "Mobile Kit",
+        repo: "https://github.com/FerVillanuevas/mob-kit",
+        descriptipn: "Build with love and Expo",
+    },
 };
 async function main() {
     console.log(chalk.blue.bold("\n🚀 Welcome to Start-Kit Generator!\n"));
@@ -170,9 +175,10 @@ async function scaffoldProject(options) {
                 npm: "npm install",
                 yarn: "yarn",
                 pnpm: "pnpm install",
-                bun: "bun install"
+                bun: "bun install",
             };
-            const installCmd = installCommands[packageManager] || "npm install";
+            const installCmd = installCommands[packageManager] ||
+                "npm install";
             execSync(installCmd, {
                 cwd: targetDir,
                 stdio: "pipe",
@@ -212,9 +218,10 @@ async function scaffoldProject(options) {
             npm: "npm install",
             yarn: "yarn",
             pnpm: "pnpm install",
-            bun: "bun install"
+            bun: "bun install",
         };
-        const installCmd = installCommands[packageManager] || "npm install";
+        const installCmd = installCommands[packageManager] ||
+            "npm install";
         console.log(chalk.white(`  ${installCmd}`));
     }
     // Show appropriate run command based on package manager
@@ -222,7 +229,7 @@ async function scaffoldProject(options) {
         npm: "npm run dev",
         yarn: "yarn dev",
         pnpm: "pnpm dev",
-        bun: "bun dev"
+        bun: "bun dev",
     };
     const runCmd = runCommands[packageManager] || "npm run dev";
     console.log(chalk.white(`  ${runCmd}\n`));

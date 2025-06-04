@@ -27,7 +27,7 @@ const TEMPLATES = {
   "mob-kit": {
     name: "Mobile Kit",
     repo: "https://github.com/FerVillanuevas/mob-kit",
-    descriptipn: "Build with love and Expo",
+    description: "Build with love and Expo",
   },
 };
 
