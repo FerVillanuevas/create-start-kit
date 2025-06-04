@@ -23,7 +23,12 @@ const TEMPLATES = {
     name: "Tanstack Start",
     repo: "https://github.com/FerVillanuevas/start-kit",
     description: "Tanstack Start, Vite, and Tailwind CSS",
-  }
+  },
+  "mob-kit": {
+    name: "Mobile Kit",
+    repo: "https://github.com/FerVillanuevas/mob-kit",
+    descriptipn: "Build with love and Expo",
+  },
 };
 
 async function main() {
@@ -35,7 +40,10 @@ async function main() {
     .version("1.0.0")
     .argument("[project-name]", "Name of the project")
     .option("-t, --template <template>", "Template to use")
-    .option("-p, --package-manager <manager>", "Package manager to use (npm, yarn, pnpm, bun)")
+    .option(
+      "-p, --package-manager <manager>",
+      "Package manager to use (npm, yarn, pnpm, bun)"
+    )
     .option("--no-install", "Skip dependency installation")
     .option("--no-git", "Skip git initialization")
     .action(async (projectName: string, options) => {
@@ -199,28 +207,36 @@ async function scaffoldProject(options: TemplateOptions) {
   // Install dependencies
   if (installDeps) {
     const { packageManager } = options;
-    const installSpinner = ora(`Installing dependencies with ${packageManager}...`).start();
-    
+    const installSpinner = ora(
+      `Installing dependencies with ${packageManager}...`
+    ).start();
+
     try {
       // Define install commands for different package managers
       const installCommands = {
         npm: "npm install",
         yarn: "yarn",
         pnpm: "pnpm install",
-        bun: "bun install"
+        bun: "bun install",
       };
-      
-      const installCmd = installCommands[packageManager as keyof typeof installCommands] || "npm install";
-      
+
+      const installCmd =
+        installCommands[packageManager as keyof typeof installCommands] ||
+        "npm install";
+
       execSync(installCmd, {
         cwd: targetDir,
         stdio: "pipe",
       });
       installSpinner.succeed("Dependencies installed successfully");
     } catch (error) {
-      installSpinner.fail(`Failed to install dependencies with ${packageManager}`);
+      installSpinner.fail(
+        `Failed to install dependencies with ${packageManager}`
+      );
       console.log(
-        chalk.yellow(`You can install them manually later with: ${packageManager} install`)
+        chalk.yellow(
+          `You can install them manually later with: ${packageManager} install`
+        )
       );
     }
   }
@@ -248,16 +264,18 @@ async function scaffoldProject(options: TemplateOptions) {
   console.log(chalk.white(`  cd ${projectName}`));
 
   const { packageManager } = options;
-  
+
   if (!installDeps) {
     // Show appropriate install command based on package manager
     const installCommands = {
       npm: "npm install",
       yarn: "yarn",
       pnpm: "pnpm install",
-      bun: "bun install"
+      bun: "bun install",
     };
-    const installCmd = installCommands[packageManager as keyof typeof installCommands] || "npm install";
+    const installCmd =
+      installCommands[packageManager as keyof typeof installCommands] ||
+      "npm install";
     console.log(chalk.white(`  ${installCmd}`));
   }
 
@@ -266,11 +284,12 @@ async function scaffoldProject(options: TemplateOptions) {
     npm: "npm run dev",
     yarn: "yarn dev",
     pnpm: "pnpm dev",
-    bun: "bun dev"
+    bun: "bun dev",
   };
-  const runCmd = runCommands[packageManager as keyof typeof runCommands] || "npm run dev";
+  const runCmd =
+    runCommands[packageManager as keyof typeof runCommands] || "npm run dev";
   console.log(chalk.white(`  ${runCmd}\n`));
-  
+
   console.log(chalk.gray("Happy coding! 🚀\n"));
 }
 
